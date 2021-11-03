@@ -2,10 +2,16 @@
 *.pickle
 *.csv
 *.parquet
+*.json
+*.bz2
+*.zip
 
 # plots
 *.png
 *.jpg
+
+# pycharm
+.idea.
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
