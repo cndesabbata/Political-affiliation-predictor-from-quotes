@@ -10,7 +10,6 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
 
-
 def preprocess_sentences(X):
     documents = []
     stemmer = WordNetLemmatizer()
