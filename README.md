@@ -46,7 +46,7 @@ Note: Questions 3 and 4 can only be answered if we can successfully assign topic
 To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
 ![Wordcloud for politicans](figures/wordcloud.png)
 
-Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter.
+Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Using this data we aim to train an ML model that depends on keyword frequency analysis, the model is trained on the distribution of these keywords in the labelled Manifesto-Project dataset and then used to classify the quotes into the same categories.
 
 ### Area 2: Sentiment analysis
 1. Is there a difference between the fraction of quotations that are positive/negative between the two parties? What does that say about the general attitude of the party?
