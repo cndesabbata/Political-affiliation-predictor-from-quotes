@@ -25,7 +25,7 @@ Finally, we obtained a dataset which associates each quote to the speaker who ut
 In total, we have 17.4 million quotes and when serialized the size of the `pickle` file is 2.93GB. From the Manifesto-Project dataset (https://manifestoproject.wzb.eu) we extracted labeled sentences of the two parties' manifestos over years 2012, 2016, and 2020. 
 
 ## Topic Labelling 
-Additionally, we used the Manifesto-Project dataset (https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter. Thanks to this classifier we may answer the following questions:
+Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter. Thanks to this classifier we may answer the following questions:
 1. How did trends about different world problems evolve from 2015 to 2020?
 2. What was each year's main discussed theme? Which one was the most popular among all years? 
 3. Are there certain matters which are discussed more by a party than the other? 
