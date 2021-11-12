@@ -72,7 +72,7 @@ Labeling the quotations as positive/negative, often referred to as sentiment ana
 
 #### Method:
 
-Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds.
+Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds. Some analysis has already been performed, please see `complexity_analysis.ipynb`.
 
 ### Area 4: Predicting speaker's political affiliation
 
