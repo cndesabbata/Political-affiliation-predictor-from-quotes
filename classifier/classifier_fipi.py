@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pickle
-from scipy import ones,hstack,arange,reshape,zeros,setdiff1d
 import json
 import os
 import glob
@@ -28,7 +27,7 @@ label2domain = {
     'Fabric of Society':6
     }
 
-def saveLabelSchema(folder = "./data"):
+def saveLabelSchema(folder = "../data/manifesto"):
     domainlabels = [{"domain":x[0],"label":x[1]} for x in label2domain.items()]
     manifestocodes = [{"manifestocode":x[0],"topic":x[1]} for x in manifestolabels(folder).items()]
 
@@ -41,28 +40,30 @@ def saveLabelSchema(folder = "./data"):
         open(folder+"/schema.json","wb"),\
         sort_keys=True, indent=2,separators=(',', ': '))
 
-def nullPrediction(folder = "data"):
+def nullPrediction(folder = "../data/manifesto"):
     return json.load(open(folder+"/nullPrediction.json"))
 
-def manifestolabels(folder = "data"):
+def manifestolabels(folder = "../data/manifesto"):
     lines = open(folder+"/manifestolabels.txt").readlines()
     return dict(map(lambda x: (int(x[3:6]), x[8:-2]),lines))
 
-mc = manifestolabels(folder='./data')
+mc = manifestolabels(folder='../data/manifesto')
 
-def get_raw_text(folder="data"):
+def get_raw_text(folder="../data/manifesto"):
     '''
     Loads raw text and labels from manifestoproject csv files
     (Downloaded from https://visuals.manifesto-project.wzb.eu)
     '''
-    files = glob.glob(folder+"/[0-9]*_[0-9]*.csv")
-    return zip(*chain(*filter(None,map(csv2DataTuple,files))))
+    # files = glob.glob(folder+"/join_result.csv")
+    # return zip(*chain(*filter(None,map(csv2DataTuple,files))))
+    with open(folder+'/join_result.csv', 'r', encoding='latin') as file:
+        return csv2DataTuple(file)
 
 def csv2DataTuple(f):
     '''
     Extracts list of tuples of (text,label) for each manifestoproject file
     '''
-    df = pd.read_csv(f,quotechar="\"").dropna()
+    df = pd.read_csv(f,quotechar="\"", encoding='latin-1').dropna()
     return zip(df['content'].tolist(),df['cmp_code'].map(int).tolist())
 
 def mapLabel2RightLeft(label):
@@ -141,7 +142,7 @@ class Classifier:
 
         '''
         if (not type(text) is list) & (len(text)<3):
-            return nullPrediction(folder='./data')
+            return nullPrediction(folder='../data/manifesto')
         # make it a list, if it is a string
         if not type(text) is list: text = [text]
         # remove digits
@@ -173,9 +174,9 @@ class Classifier:
             print('Could not load text data file in\n')
             raise
         # the scikit learn pipeline for vectorizing, normalizing and classifying text
-        text_clf = Pipeline([('vect', CountVectorizer()),
+        text_clf = Pipeline(steps=[('vect', CountVectorizer()),
                             ('tfidf', TfidfTransformer()),
-                            ('clf',LogisticRegression(class_weight='auto', dual=False))])
+                            ('clf', LogisticRegression(class_weight='balanced', dual=False))])
         parameters = {'vect__ngram_range': [(1, 1)],\
                'tfidf__use_idf': (True,False),\
                'clf__C': (10.**arange(4,5,1.)).tolist()}

@@ -1,10 +1,12 @@
 # datasets
+data/
 *.pickle
 *.csv
 *.parquet
 *.json
 *.bz2
 *.zip
+*.txt
 
 # plots
 *.png
