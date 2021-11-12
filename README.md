@@ -28,7 +28,10 @@ After preprocessing we have a dataset of 1.6m quotations of US politicians, asso
 
 ![Sample from the US Politicians dataset](figures/dataframe-sample.png)
 
-## Topic Labelling 
+## Topic Labelling
+To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
+ ![Wordcloud for politicans](figures/wordcloud.png)
+
 Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter. Thanks to this classifier we may answer the following questions:
 1. How did trends about different world problems evolve from 2015 to 2020?
 2. What was each year's main discussed theme? Which one was the most popular among all years? 
