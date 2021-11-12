@@ -8,10 +8,6 @@ data/
 *.zip
 *.txt
 
-# plots
-*.png
-*.jpg
-
 # pycharm
 .idea.
 
