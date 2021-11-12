@@ -143,8 +143,10 @@ class Classifier:
             return nullPrediction(folder='../data/manifesto')
         # make it a list, if it is a string
         if not type(text) is list: text = [text]
+
+        # TODO this existing filter function doesn't work as intended
         # remove digits
-        text = map(lambda y: str(filter(lambda x: not x.isdigit(),y)),text)
+        # text = map(lambda y: str(filter(lambda x: not x.isdigit(),y)),text)
 
         # predict probabilities
         probabilities = self.clf.predict_proba(text).flatten()
