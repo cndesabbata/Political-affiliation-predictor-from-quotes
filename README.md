@@ -7,11 +7,12 @@ This repository contains a data analysis project for CS-401 Applied Data Analysi
 - Dixit Sabharwal - dixit.sabharwal@epfl.ch
 - Elia Fantini - elia.fantini@epfl.ch
 
-## You are what you say: can a bunch of words tell what your political view is?
+# Topic: You are what you say: can a bunch of words tell what your political view is?
 
 ## Abstract
 Political opinions can be one of the most socially unifying or divisive topics, defining the people we surround ourselves with. It has been strongly debated the extent to which contemporary political parties well represent each ideology and their internal and temporal coherence of opinions. What we plan to investigate in the following project is how such opinions and ideas can influence the way politicians speak, what they talk about, and the way they do it.
-Starting from quotes of US representatives of the Democrats and Republican parties, we divide them by treated subject and perform  sentiment analysis on them across time, to assess the evolution of opinions of the two groups on different matters. Pairing these results with an analysis of the lexical and syntactical properties of the sentences, we try to build a model capable of predicting the affiliations of the speaker based on his quotes.
+
+Starting from quotes of US representatives of the Democratic and Republican parties, we divide them by treated subject and perform  sentiment analysis on them across time, to assess the evolution of opinions of the two groups on different matters. Pairing these results with an analysis of the lexical and syntactical properties of the sentences, we try to build a model capable of predicting the affiliations of the speaker based on his quotes.
 
 ## Data Preprocessing 
 To perform the analysis, we are interested in selecting only the quotes from politicians and matching them with the political affiliation of the speaker.
