@@ -48,5 +48,5 @@ Combining all the data from the preprocessing, enriched by sentiment analysis, t
 ## Internal Milestones & Timeline
 * 26 Nov - 3 Dec: In the first week we plan to train the classifier to do topic labeling on our quotes, perform sentiment analysis on the quotes divided both by year and by topic and make use of the Textstat library to examine the grammar and complexity of the sentences.
 * 3 Dec - 10 Dec: In the second week we'll start drawing conclusions on the results obtained in the previous week and train the final classifier.
-* 10 Dec - 17 Dec: In the final week the analyze the results of the classifier and finish/perfect the graphs and the overall analysis. 
+* 10 Dec - 17 Dec: In the final week the analyze the results of the classifier and polish/perfect the graphs and the overall analysis. 
 We didn't set up internal milestones yet as we believe we would work better if they were decided week by week, as the project progresses.
