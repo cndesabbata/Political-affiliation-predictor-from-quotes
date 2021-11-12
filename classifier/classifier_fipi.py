@@ -2,14 +2,12 @@
 import pickle
 import json
 import os
-import glob
-from itertools import chain
+from numpy import arange
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
 import pandas as pd
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
-from sklearn import metrics
 
 # manifestoproject codes for left/right orientation
 label2rightleft = {
@@ -57,14 +55,14 @@ def get_raw_text(folder="../data/manifesto"):
     # files = glob.glob(folder+"/join_result.csv")
     # return zip(*chain(*filter(None,map(csv2DataTuple,files))))
     with open(folder+'/join_result.csv', 'r', encoding='latin') as file:
-        return csv2DataTuple(file)
+        return zip(*csv2DataTuple(file))
 
 def csv2DataTuple(f):
     '''
     Extracts list of tuples of (text,label) for each manifestoproject file
     '''
-    df = pd.read_csv(f,quotechar="\"", encoding='latin-1').dropna()
-    return zip(df['content'].tolist(),df['cmp_code'].map(int).tolist())
+    df = pd.read_csv(f,quotechar="\"").dropna()
+    return zip(df['sentence'].tolist(),df['label'].map(int).tolist())
 
 def mapLabel2RightLeft(label):
     '''
@@ -126,11 +124,11 @@ class Classifier:
 
         '''
         # if there is no classifier file or training is invoked
-        if (not os.path.isfile('classifier.pickle')) or train:
+        if (not os.path.isfile('classifier_fipi.pickle')) or train:
             print('Training classifier')
             self.train()
         print('Loading classifier')
-        self.clf = pickle.load(open('classifier.pickle'))
+        self.clf = pickle.load(open('classifier_fipi.pickle', 'rb'))
 
     def predict(self,text):
         '''
@@ -145,15 +143,18 @@ class Classifier:
             return nullPrediction(folder='../data/manifesto')
         # make it a list, if it is a string
         if not type(text) is list: text = [text]
+
+        # TODO this existing filter function doesn't work as intended
         # remove digits
-        text = map(lambda y: filter(lambda x: not x.isdigit(),y),text)
+        # text = map(lambda y: str(filter(lambda x: not x.isdigit(),y)),text)
+
         # predict probabilities
         probabilities = self.clf.predict_proba(text).flatten()
         predictions = dict(zip(self.clf.classes_, probabilities.tolist()))
 
         # transform the predictions into json output
         return {
-                'text':text,
+                'text': text,
                 'leftright':mapPredictions2RightLeft(predictions),
                 'domain':mapPredictions2Domain(predictions),
                 'manifestocode':[{"label":mc[x[0]],"prediction":x[1]} for x in predictions.items()]
@@ -184,4 +185,4 @@ class Classifier:
         gs_clf = GridSearchCV(text_clf, parameters, cv=folds, n_jobs=-1,verbose=3)
         gs_clf.fit(data,labels)
         # dump classifier to pickle
-        pickle.dump(gs_clf.best_estimator_,open('classifier.pickle','wb'),-1)
+        pickle.dump(gs_clf.best_estimator_,open('classifier_fipi.pickle','wb'), 4)
