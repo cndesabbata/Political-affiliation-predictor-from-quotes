@@ -20,8 +20,7 @@ To perform the analysis, we are interested in selecting only the quotes from pol
 3. Load the Wikidata table with metadata about the speakers and select the speakers that are affiliated with the Democratic or Republican party.
 4. Perform an inner join between the table containing the quotes (Quotebank) and the table containing (Wikidata).
 In addition to the previous points, we used grammatical structure and complexity metrics to analyze quotes and drop the ones with outlier values, as they were related to meaningless quotes.
-Finally, we obtained a dataset which associates each quote to the speaker who uttered it and his political affiliation, see an example below:
-## insert image
+Finally, we obtained a dataset which associates each quote to the speaker who uttered it and his political affiliation.
 In total, we have 17.4 million quotes and when serialized the size of the `pickle` file is 2.93GB. From the Manifesto-Project dataset (https://manifestoproject.wzb.eu) we extracted labeled sentences of the two parties' manifestos over years 2012, 2016, and 2020. 
 
 ## Topic Labelling 
