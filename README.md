@@ -17,7 +17,7 @@ Political opinions can be one of the most socially unifying or divisive topics, 
 
 Starting from quotes of US representatives of the Democratic and Republican parties, we divide them by treated subject and perform sentiment analysis on them across time, to assess the evolution of opinions of the two groups on different matters. Pairing these results with an analysis of the lexical and syntactical properties of the sentences, we try to build a model capable of predicting the affiliations of the speaker based on his quotes.
 
-## Data Preprocessing
+## Data preprocessing
 
 To perform the analysis, we are interested in selecting only the quotes from politicians and matching them with the political affiliation of the speaker.
 To obtain such a dataset, we perform the following preprocessing steps:
@@ -33,37 +33,41 @@ In addition, we plan to use grammatical structure and complexity metrics to anal
 After preprocessing we have a dataset of 1.6m quotations of US politicians, associating each quote to the speaker who uttered it and his political affiliation - see an example below:
 
 ![Sample from the US Politicians dataset](figures/dataframe-sample.png)
+## Research questions
+### Area 1: Topic labelling
+1. What terms/phrases characteristic for politics appear most often in the quotations? Is there a difference between the terms used by two parties?
+2. Can a classifier be constructed to automatically classify quotations to groups corresponding to topics (e.g. economy, military, environment)?
+3. How does the topic popularity differ between the two parties? Can the popular topics be linked to the ideologies linked to the speaker's party?
+4. How do the topic popularity evolve with time?
 
-## Topic Labelling
+Note: Questions 3 and 4 can only be answered if we can successfully assign topics to quotations.
 
+#### Method:
 To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
 ![Wordcloud for politicans](figures/wordcloud.png)
 
-Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter. Thanks to this classifier we may answer the following questions:
+Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled accordingly to the issue they deal with. Using this data should allow us to train the ML model of a topic classifier, to add to each quote the subject matter.
 
-1. How did trends about different world problems evolve from 2015 to 2020?
-2. What was each year's main discussed theme? Which one was the most popular among all years?
-3. Are there certain matters which are discussed more by a party than the other?
-
-## Sentiment Analysis
-
-Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805). Once additional information about quotation sentiment is extracted, we want to answer the following research questions:
-
+### Area 2: Sentiment analysis
 1. Is there a difference between the fraction of quotations that are positive/negative between the two parties? What does that say about the general attitude of the party?
-2. Are there any issues addressed differently by parties? Do they try to rouse different emotions on the same society's problem?
-3. Is there any case of a party changing completely in the attitude towards a specific topic during the time?
+2. What are there topics towards which one parties have very different sentiment? Does this align with the parties' ideology?
+3. Are there cases of a party changing completely its attitude towards a specific topic?
 
-## Grammatical Structure and Complexity
+#### Method:
+Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805). The sentiment can be then computed per party/topic and the time evolution can also be analyzed.
 
-Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds. By studying the properties of the language used by the representatives we want to answer the following research questions:
-
+### Area 3: Grammatical structure and complexity
 1. Do speakers of the two groups use different lexicon? Which one uses the largest vocabulary?
 2. Is there any noticeable difference in the complexity of the sentences? Which one is more readable?
-3. How did the grammar and correctness of sentences evolve over the year? Is it the same across the two parties?
+3. How did the grammar complexity and correctness of sentences evolve with time?
 
-## Construction of the Classifier
+#### Method:
+Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds. By studying the properties of the language used by the representatives we want to answer the following research questions:
 
-Combining all the data from the preprocessing, enriched by sentiment analysis, topic classification, and grammatical complexity, is it possible to build a classifier that can predict whether the quoted speaker is affiliated with Republicans or Democrats? If yes, it would mean that there is a strong difference in how people sustaining a certain party speak, feel, and think about the main problems of society.
+### Area 4: Predicting speaker's political affiliation
+1. Combining all the data from the preprocessing, enriched by sentiment analysis, topic classification, and grammatical complexity, is it possible to build a classifier that can predict whether the quoted speaker is affiliated with Republicans or Democrats?
+
+#### Method: TODO
 
 ## Internal Milestones & Timeline
 
