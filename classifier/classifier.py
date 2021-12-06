@@ -54,8 +54,10 @@ def create_topic_classifier(X = list,y = np.array, SAVE_MODEL_PATH = str):
 
 
 if __name__ == "__main__":
-    DATASET_PATH = 'data/join_result.csv'
+    DATASET_PATH = "../data/binary/manifesto_data/join_result.csv"
     df = pd.read_csv(DATASET_PATH)
+    for i in range(1, 8):
+        df.loc[ df['label']//100 == i , 'label'] = i 
     X = list(df['sentence'])
     y = np.array(df['label'])
     create_topic_classifier(X, y, 'topic_classifier')
