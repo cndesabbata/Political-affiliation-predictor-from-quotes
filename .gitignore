@@ -1,12 +1,14 @@
 # datasets
-data/
+data/binary/
+data/raw/
+data/manifesto/
+
 *.pickle
 *.csv
 *.parquet
 *.json
 *.bz2
 *.zip
-*.txt
 
 # pycharm
 .idea.
