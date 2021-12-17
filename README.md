@@ -58,11 +58,10 @@ Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.w
 
 1. Is there a difference between the fraction of quotations that are positive/negative between the two parties? What does that say about the general attitude of the party?
 2. What are there topics towards which the parties have very different sentiments? Does this align with the parties' ideology?
-3. Are there cases of a party changing completely its attitude towards a specific topic?
 
 #### Method:
 
-Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805). The sentiment can be then computed per party/topic and the time evolution can also be analyzed.
+Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805) or rule-based tools like `VADER-Sentiment`. The sentiment can be then computed per party/topic and the time evolution can also be analyzed.
 
 ### Area 3: Grammatical structure and complexity
 
