@@ -2,6 +2,8 @@
 
 This repository contains a data analysis project for CS-401 Applied Data Analysis at EPFL.
 
+Click [here](https://dxts.github.io/ada-2021-project-datastory/) for the Data-story.
+
 ### Authors
 
 - Maciej Styczeń - maciej.styczen@epfl.ch
