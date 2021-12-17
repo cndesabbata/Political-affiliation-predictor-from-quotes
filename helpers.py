@@ -94,12 +94,14 @@ def plot_across_time(democrats_across_time, republicans_across_time):
     # Plot the obtained results
     fig, ax = plt.subplots()
     ax.bar(democrats_across_time['Date-Time'], democrats_across_time['count'],
-           log=True, alpha=0.5, label="Democrats", align='center')
+           log=True, color='#0027FF', alpha=0.5, label="Democrats", align='center')
     ax.bar(republicans_across_time['Date-Time'], republicans_across_time['count'],
            log=True, alpha=0.5, label="Republicans", align='center')
     plt.xticks(np.arange(0, len(democrats_across_time['Date-Time']) + 1, 12))
     ax.set_xlabel('Date')
     ax.set_ylabel('Num. of quotations')
+    plt.title("Distribution of sampled quotes over time")
+    plt.legend()
     plt.show()
 
 
@@ -109,9 +111,9 @@ def plot_length(democrats, republicans):
     republicans_lengths = republicans["quotation"].apply(lambda x: len(x))
 
     plt.hist(democrats_lengths, log=True,
-             alpha=0.5, label="Democrats", bins=100)
+             color='#0027FF', alpha=0.7, label="Democrats", bins=100)
     plt.hist(republicans_lengths, log=True,
-             alpha=0.5, label="Republicans", bins=100)
+             color='#900C3F', alpha=0.7, label="Republicans", bins=100)
     plt.axvline(republicans_lengths.mean(), color='red',
                 label=f"mean republicans: {np.round(republicans_lengths.mean(), 1)}")
     plt.axvline(democrats_lengths.mean(), color='blue',
@@ -136,21 +138,29 @@ def plot_metrics_scores(dem_data, rep_data, title):
     bins = np.logspace(0, np.log10(10**3), 50)
 
     axs[0].hist(dem_data['flesch_reading_ease'],
-                log=True, alpha=0.5, bins=bins)
+                log=True, color='#0027FF', alpha=0.7, bins=bins)
     axs[0].hist(rep_data['flesch_reading_ease'],
-                log=True, alpha=0.5, bins=bins)
+                log=True, color='#900C3F', alpha=0.7, bins=bins)
     axs[0].set_title("Flesch reading ease, higher is easier")
+
     axs[1].hist(dem_data['dale_chall_readability_score'],
-                log=True, alpha=0.5, bins=bins)
+                log=True, color='#0027FF', alpha=0.7, bins=bins)
     axs[1].hist(rep_data['dale_chall_readability_score'],
-                log=True, alpha=0.5, bins=bins)
+                log=True, color='#900C3F', alpha=0.7, bins=bins)
     axs[1].set_title("Dale Chall readability score, lower is easier")
-    axs[2].hist(dem_data['text_standard'], log=True, alpha=0.5, bins=bins)
-    axs[2].hist(rep_data['text_standard'], log=True, alpha=0.5, bins=bins)
+
+    axs[2].hist(dem_data['text_standard'], log=True,
+                color='#0027FF', alpha=0.7, bins=bins)
+    axs[2].hist(rep_data['text_standard'], log=True,
+                color='#900C3F', alpha=0.7, bins=bins)
     axs[2].set_title("Text Standard test score, lower is easier")
-    axs[3].hist(dem_data['reading_time'], log=True, alpha=0.5, bins=bins)
-    axs[3].hist(rep_data['reading_time'], log=True, alpha=0.5, bins=bins)
+
+    axs[3].hist(dem_data['reading_time'], log=True,
+                color='#0027FF', alpha=0.7, bins=bins)
+    axs[3].hist(rep_data['reading_time'], log=True,
+                color='#900C3F', alpha=0.7, bins=bins)
     axs[3].set_title("Reading time")
+
     metrics_rep = rep_data[metrics_columns]
     metrics_dem = dem_data[metrics_columns]
     mean_dem = metrics_dem.mean(axis=0)
@@ -246,7 +256,8 @@ def create_and_save_model_topic_clusterer(quotebank_path, save_model_path, save_
     quotes = list(data['quotation'])
     # some tricks to prevent insufficient RAM
     del data
-    vectorizer_model = CountVectorizer(ngram_range=(1, 2), stop_words="english", min_df=10)
+    vectorizer_model = CountVectorizer(
+        ngram_range=(1, 2), stop_words="english", min_df=10)
     topic_model = BERTopic(verbose=True, vectorizer_model=vectorizer_model, min_topic_size=50, n_gram_range=(1, 3),
                            low_memory=True, calculate_probabilities=False, nr_topics=50)
     # training the model
@@ -276,7 +287,8 @@ def create_and_save_model_topic_clusterer(quotebank_path, save_model_path, save_
     all_predictions = []
     # for RAM limitations, computing predictions on new data dividing the workload into 4 parts
     for i in range(4):
-        predictions, probabilities = topic_model.transform(quotes[(i * part_size): (i + 1) * part_size])
+        predictions, probabilities = topic_model.transform(
+            quotes[(i * part_size): (i + 1) * part_size])
         all_predictions.extend(predictions)
     topic_model = None  # to free memory
     del quotes  # to free memory
