@@ -105,7 +105,7 @@ In the second week we will:
 - start drawing conclusions based on the results obtained in the previous week
 - train the final classifier for predicting the speaker's party based on the content of the quotation
 
-#### Week of 10.12 - 12.12
+#### Week of 12.12 - 17.12
 
 In the final week we aim to:
 
@@ -114,3 +114,12 @@ In the final week we aim to:
 - focus on writing an attractive data story based on our results
 
 We aim to follow an agile, sprint-based development workflow, therefore more precise internal milestones will be decided week by week, as the project progresses.
+
+## Results and project wrap-up
+The results of our work are presented on [our datastory website](https://dxts.github.io/ada-2021-project-datastory/). Majority of our code can be found in the `ADA_project.ipynb` Jupyter notebook, with some supporting functions present in the `src` module.
+
+### Contributions
+* Dixit: Complexity and readibility analysis, set-up datastory website.
+* Elia: Topic analysis, complexity analysis, writing the datastory.
+* Maciej: Frequency analysis, sentiment analysis, plots, some work on the datastory.
+* Nicolo: Topic analysis, preliminary analysis, classifier.
