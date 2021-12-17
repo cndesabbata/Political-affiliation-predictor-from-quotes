@@ -52,17 +52,21 @@ Please consult `preprocessing.ipynb` for the code and a more extensive explanati
 To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
 ![Wordcloud for politicans](figures/wordcloud.png)
 
-Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Using this data we aim to train an ML model that depends on keyword frequency analysis, the model is trained on the distribution of these keywords in the labeled Manifesto-Project dataset and then used to classify the quotes into the same categories.
+To achieve that, we first tried to use a transfer-learning approach: train a classifier on the data obtained from the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Unfortunately, the data was too different from ours and thus the resulting accuracy was not satisfying. 
+
+We then proceeded with unsupervised clustering using Bertopic, a topic modeling technique that leverages transformers
+and c-TF-IDF to create dense clusters allowing for easily interpretable topics whilst keeping important words in the
+topic descriptions. After a quick manual preprocessing of the quotes and a preprocessing pipeline from `BERTopic` library
+itself, we trained the model with a third of the dataset (0.6 million quotes), due to RAM limitations.
 
 ### Area 2: Sentiment analysis
 
 1. Is there a difference between the fraction of quotations that are positive/negative between the two parties? What does that say about the general attitude of the party?
 2. What are there topics towards which the parties have very different sentiments? Does this align with the parties' ideology?
-3. Are there cases of a party changing completely its attitude towards a specific topic?
 
 #### Method:
 
-Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805). The sentiment can be then computed per party/topic and the time evolution can also be analyzed.
+Labeling the quotations as positive/negative, often referred to as sentiment analysis, introduces additional information about the emotion that is carried by the quotation. Attributing sentiment to quotations can be performed using pre-trained transformer models such as [BERT](https://arxiv.org/abs/1810.04805) or rule-based tools like `VADER-Sentiment`. The sentiment can be then computed per party/topic and the time evolution can also be analyzed.
 
 ### Area 3: Grammatical structure and complexity
 
@@ -105,7 +109,7 @@ In the second week we will:
 - start drawing conclusions based on the results obtained in the previous week
 - train the final classifier for predicting the speaker's party based on the content of the quotation
 
-#### Week of 10.12 - 12.12
+#### Week of 12.12 - 17.12
 
 In the final week we aim to:
 
@@ -114,3 +118,12 @@ In the final week we aim to:
 - focus on writing an attractive data story based on our results
 
 We aim to follow an agile, sprint-based development workflow, therefore more precise internal milestones will be decided week by week, as the project progresses.
+
+## Results and project wrap-up
+The results of our work are presented on [our datastory website](https://dxts.github.io/ada-2021-project-datastory/). Majority of our code can be found in the `ADA_project.ipynb` Jupyter notebook, with some supporting functions present in the `src` module.
+
+### Contributions
+* Dixit: Complexity and readibility analysis, set-up datastory website.
+* Elia: Topic analysis, complexity analysis, writing the datastory.
+* Maciej: Frequency analysis, sentiment analysis, plots, some work on the datastory.
+* Nicolo: Topic analysis, preliminary analysis, classifier.
