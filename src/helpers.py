@@ -17,7 +17,7 @@ from nltk.tokenize import word_tokenize
 from bertopic import BERTopic
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
-from constants import *
+from src.constants import *
 
 
 def generate_speaker_affiliations(parquet_path, out_path, remove_raw=False):
