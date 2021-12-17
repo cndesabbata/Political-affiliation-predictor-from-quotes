@@ -4,6 +4,10 @@ SPEAKER_AFFILIATIONS_OUT_PATH = "data/binary/speaker_attributes.pickle"
 US_POLITICIANS = "data/binary/us-politicians.pickle"
 WITH_CLUSTERS = "data/binary/us-politicians-with-clusters.pickle"
 DEMOCRATIC_PARTY_ID = 29552
+D_COLOR = "#0027FF"
+R_COLOR = "#900C3F"
+N_COLOR = "#F0A025"
+ALPHA = 0.75
 REPUBLICAN_PARTY_ID = 29468
 TOPICS = {
     71: "RussiaGate",
