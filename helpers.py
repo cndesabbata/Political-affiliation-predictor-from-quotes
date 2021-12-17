@@ -17,6 +17,7 @@ from nltk.tokenize import word_tokenize
 from bertopic import BERTopic
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
+from constants import *
 
 
 def generate_speaker_affiliations(parquet_path, out_path, remove_raw=False):
@@ -92,17 +93,20 @@ def plot_across_time(democrats_across_time, republicans_across_time):
         ['Date-Time'], as_index=False).agg('count')
 
     # Plot the obtained results
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(1,1)
     ax.bar(democrats_across_time['Date-Time'], democrats_across_time['count'],
-           log=True, color='#0027FF', alpha=0.5, label="Democrats", align='center')
+           log=True, color=D_COLOR, alpha=ALPHA, label="Democrats", align='center')
     ax.bar(republicans_across_time['Date-Time'], republicans_across_time['count'],
-           log=True, alpha=0.5, label="Republicans", align='center')
-    plt.xticks(np.arange(0, len(democrats_across_time['Date-Time']) + 1, 12))
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Num. of quotations')
-    plt.title("Distribution of sampled quotes over time")
-    plt.legend()
-    plt.show()
+           log=True, color=R_COLOR, alpha=ALPHA, label="Republicans", align='center')
+    ax.set_xticks(np.arange(0, len(democrats_across_time['Date-Time']) + 1, 12))
+    ax.set_xlabel('Date', fontsize=14)
+    ax.set_ylabel('Num. of quotations', fontsize=14)
+    fig.suptitle("Number of quotations vs time", fontsize=18)
+    handles, labels = ax.get_legend_handles_labels()
+    fig.legend(handles, labels, loc='lower center', ncol=2, bbox_to_anchor=(0.5, -0.03))
+    fig.set_size_inches(16,10)
+    fig.savefig("figures/quotes-accross-time.png", dpi=1200, bbox_inches="tight")
+    fig.show()
 
 
 def plot_length(democrats, republicans):
@@ -110,10 +114,8 @@ def plot_length(democrats, republicans):
     democrats_lengths = democrats["quotation"].apply(lambda x: len(x))
     republicans_lengths = republicans["quotation"].apply(lambda x: len(x))
 
-    plt.hist(democrats_lengths, log=True,
-             color='#0027FF', alpha=0.7, label="Democrats", bins=100)
-    plt.hist(republicans_lengths, log=True,
-             color='#900C3F', alpha=0.7, label="Republicans", bins=100)
+    plt.hist(democrats_lengths, log=True, color=D_COLOR, alpha=ALPHA, label="Democrats", bins=100, density=True)
+    plt.hist(republicans_lengths, log=True, color=R_COLOR, alpha=ALPHA, label="Republicans", bins=100, density=True)
     plt.axvline(republicans_lengths.mean(), color='red',
                 label=f"mean republicans: {np.round(republicans_lengths.mean(), 1)}")
     plt.axvline(democrats_lengths.mean(), color='blue',
@@ -123,9 +125,12 @@ def plot_length(democrats, republicans):
     plt.axvline(democrats_lengths.median(), color='green',
                 label=f"median democrats: {np.round(democrats_lengths.median(), 1)}")
     plt.xlabel('Length of quotation')
-    plt.ylabel('Num. of quotations')
+    plt.ylabel('Density')
     plt.title("Length of politicans' quotations.")
-    plt.legend()
+    plt.legend(loc="best")
+    plt.tight_layout()
+    plt.rcParams["figure.figsize"] = (12,6)
+    plt.savefig("figures/length-distribution.png", dpi=1200, bbox_inches="tight")
     plt.show()
 
 
