@@ -52,7 +52,12 @@ Please consult `preprocessing.ipynb` for the code and a more extensive explanati
 To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
 ![Wordcloud for politicans](figures/wordcloud.png)
 
-Additionally, we used the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Using this data we aim to train an ML model that depends on keyword frequency analysis, the model is trained on the distribution of these keywords in the labeled Manifesto-Project dataset and then used to classify the quotes into the same categories.
+To achieve that, we first tried to use a transfer-learning approach: train a classifier on the data obtained from the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Unfortunately, the data was too different from ours and thus the resulting accuracy was not satisfying. 
+
+We then proceeded with unsupervised clustering using Bertopic, a topic modeling technique that leverages transformers
+and c-TF-IDF to create dense clusters allowing for easily interpretable topics whilst keeping important words in the
+topic descriptions. After a quick manual preprocessing of the quotes and a preprocessing pipeline from `BERTopic` library
+itself, we trained the model with a third of the dataset (0.6 million quotes), due to RAM limitations.
 
 ### Area 2: Sentiment analysis
 
