@@ -16,7 +16,7 @@ from transformers import EarlyStoppingCallback
 
 
 #load pickle of labels
-LABELS_CSV_PATH = "../classifier/data/join_result.csv"
+LABELS_CSV_PATH = "/data/join_result.csv"
 topics = pd.read_csv(LABELS_CSV_PATH)
 topics = topics.drop(topics[topics['label'] == 0].index)
 
