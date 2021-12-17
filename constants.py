@@ -32,7 +32,7 @@ TOPICS = {
     343: "Climate Change",
     589: "Economy",
     620: "Trade",
-    459: "Democracy",
+    459: "Politics",
     241: "LGBTQ policies",
     505: "Senate",
     46: "India",
