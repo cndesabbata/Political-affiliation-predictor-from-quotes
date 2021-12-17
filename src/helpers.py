@@ -138,8 +138,9 @@ def plot_metrics_scores(dem_data, rep_data, title):
     # plotting distribution, mean and median for both republicans and democrats, in the four calculated scores
     metrics_columns = ['flesch_reading_ease',
                        'dale_chall_readability_score', 'text_standard', 'reading_time']
+    plt.figure()
     fig, axs = plt.subplots(4, figsize=(10, 15))
-    fig.suptitle(title, fontsize=16)
+    fig.suptitle(title)
     bins = np.logspace(0, np.log10(10**3), 50)
 
     axs[0].hist(dem_data['flesch_reading_ease'],
@@ -184,6 +185,9 @@ def plot_metrics_scores(dem_data, rep_data, title):
                    label=f"median democrats: {np.round(median_dem[i], 1)}")
         ax.legend()
         ax.set_xscale('log')
+    plt.tight_layout()
+    fig.subplots_adjust(top=0.88)
+    plt.savefig("figures/complexity_metrics_14-1.png", dpi=1200, bbox_inches="tight")
     plt.show()
 
 
