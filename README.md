@@ -1,23 +1,29 @@
-## CS-401 Applied Data Analysis - Project
+<p align="center">
+  <img alt="📺Political_Party_Classifier" src="https://user-images.githubusercontent.com/62103572/183381985-621bda2f-4342-425d-ae0e-f980d628913c.png">
+  <img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/y/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset">
+  <img alt="GitHub code size" src="https://img.shields.io/github/languages/code-size/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset">
+  <img alt="GitHub follow" src="https://img.shields.io/github/followers/EliaFantini?label=Follow">
+  <img alt="GitHub fork" src="https://img.shields.io/github/forks/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset?label=Fork">
+  <img alt="GitHub watchers" src="https://img.shields.io/github/watchers/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset?label=Watch">
+  <img alt="GitHub star" src="https://img.shields.io/github/stars/EliaFantini/Political-party-classifier-from-quotes-A-data-story-from-a-data-analysis-of-Quotebank-dataset?style=social">
+</p>
 
-This repository contains a data analysis project for CS-401 Applied Data Analysis at EPFL.
+In this project we investigated how opinions and ideas can influence the way politicians speak, what they talk about, and the way they do it, with the ultimate aim of predicting the party of a politician just by his sentences, without any prior knowledge on the speaker. Is that possible? A machine learning classifier will try to answer this question.
 
-Click [here](https://dxts.github.io/ada-2021-project-datastory/) for the Data-story.
+Since trying to answer the previous questions on a global scale would be too big of research for a single story, we decided to focus on the two most famous political parties in the world: USA’s Republican and Democratic parties. Starting from quotes of US representatives of the Democratic and Republican parties, we divide them by treated subject and perform sentiment analysis on them across time, to assess the evolution of opinions of the two groups on different matters. Pairing these results with an analysis of the lexical and syntactical properties of the sentences, we try to build a model capable of predicting the affiliations of the speaker based on his quotes.
 
-### Authors
+This project was done for the EPFL course [CS-401 Applied data analysis](https://edu.epfl.ch/coursebook/en/applied-data-analysis-CS-401) (2021/2022) and most of the data was taken from [Quotebank dataset](https://zenodo.org/record/4277311#.YvDUCPjP3tU), a corpus of quotations from a decade of news.
 
-- Maciej Styczeń - maciej.styczen@epfl.ch
-- Nicolo de Sabbata - camillo.desabbata@epfl.ch
-- Dixit Sabharwal - dixit.sabharwal@epfl.ch
-- Elia Fantini - elia.fantini@epfl.ch
+The final results of the project were put together into a **Data-story**. You can read it by clicking [here](https://dxts.github.io/ada-2021-project-datastory/).
 
-# Topic: You are what you say: can a bunch of words tell what your political view is?
+## Authors
 
-## Abstract
-
-Political opinions can be one of the most socially unifying or divisive topics, defining the people we surround ourselves with. It has been strongly debated the extent to which contemporary political parties well represent each ideology and their internal and temporal coherence of opinions. What we plan to investigate in the following project is how such opinions and ideas can influence the way politicians speak, what they talk about, and the way they do it.
-
-Starting from quotes of US representatives of the Democratic and Republican parties, we divide them by treated subject and perform sentiment analysis on them across time, to assess the evolution of opinions of the two groups on different matters. Pairing these results with an analysis of the lexical and syntactical properties of the sentences, we try to build a model capable of predicting the affiliations of the speaker based on his quotes.
+- [Elia Fantini](https://github.com/EliaFantini/)
+- [Maciej Styczeń](https://github.com/mstyczen)
+- [Nicolo de Sabbata](https://github.com/cndesabbata)
+- [Dixit Sabharwal](https://github.com/dxts)
 
 ## Data preprocessing
 
@@ -36,9 +42,7 @@ After preprocessing we have a dataset of 1.6m quotations of US politicians, asso
 
 ![Sample from the US Politicians dataset](figures/dataframe-sample.png)
 
-Please consult `preprocessing.ipynb` for the code and a more extensive explanation of the preprocessing steps.
-
-## Research questions
+## Data analysis performed
 
 ### Area 1: Topic labeling
 
@@ -51,8 +55,8 @@ Please consult `preprocessing.ipynb` for the code and a more extensive explanati
 
 #### Method:
 
-To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis (see `frequency_analysis.ipynb`). The results are visualized in the figure below:
-![Wordcloud for politicans](figures/wordcloud.png)
+To get an initial understanding of what topics do politicians often mention, we performed a word frequency analysis. The results are visualized in the figure below:
+![Wordcloud for politicans](figures/wordcloud_all.png)
 
 To achieve that, we first tried to use a transfer-learning approach: train a classifier on the data obtained from the [Manifesto-Project dataset](https://manifestoproject.wzb.eu), which provides sentences of the two parties' manifestos over years 2012, 2016, and 2020, labeled manually by experts to one of fifteen different topics/categories. Unfortunately, the data was too different from ours and thus the resulting accuracy was not satisfying. 
 
@@ -78,7 +82,7 @@ Labeling the quotations as positive/negative, often referred to as sentiment ana
 
 #### Method:
 
-Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds. Some analysis has already been performed, please see `exploratory_analysis.ipynb`.
+Utilizing the `Textstat` library we added to each quotes different readability, complexity, and grade level metrics. Thanks to these statistics we might see if there's a significant difference between speakers from different parties, as well as differences between people with identical affiliations but different backgrounds. 
 
 ### Area 4: Predicting speaker's political affiliation
 
@@ -88,40 +92,7 @@ Utilizing the `Textstat` library we added to each quotes different readability, 
 
 Build a classifier using a CNN. Utilizing all features generated by previous analysis feature extraction, train the CNN for the classification task. Evaluate performance on a test set.
 
-## Internal Milestones & Timeline
-
-A high-level timeline of the planned project execution:
-
-#### Week of 26.11 - 3.12
-
-In the first week we plan to:
-
-- explore the topics covered in the quotations:
-  - explore the terms commonly used in the quotations
-  - train a classifier for topic labeling
-- perform sentiment analysis on the quotes, explore
-  - the sentiment the parties have towards certain topics
-  - the time evolution of the sentiment
-- make use of the `Textstat` library to examine the grammar and complexity of the sentences
-
-#### Week of 3.12 - 12.12
-
-In the second week we will:
-
-- start drawing conclusions based on the results obtained in the previous week
-- train the final classifier for predicting the speaker's party based on the content of the quotation
-
-#### Week of 12.12 - 17.12
-
-In the final week we aim to:
-
-- analyze the results of the classifier
-- polish/perfect the graphs and the overall analysis
-- focus on writing an attractive data story based on our results
-
-We aim to follow an agile, sprint-based development workflow, therefore more precise internal milestones will be decided week by week, as the project progresses.
-
-## Results and project wrap-up
+## Results 
 The results of our work are presented on [our datastory website](https://dxts.github.io/ada-2021-project-datastory/). Majority of our code can be found in the `ADA_project.ipynb` Jupyter notebook, with some supporting functions present in the `src` module.
 
 ### Contributions
@@ -129,3 +100,50 @@ The results of our work are presented on [our datastory website](https://dxts.gi
 * Elia: Topic analysis, complexity and readability analysis, writing the datastory.
 * Maciej: Frequency analysis, sentiment analysis, plots, some work on the datastory.
 * Nicolo: Topic analysis, preliminary analysis, classifier.
+
+## How to install and reproduce results
+Download this repository as a zip file and extract it into a folder. The easiest way to run the code is to install Anaconda 3 distribution (available for Windows, macOS and Linux). To do so, follow the guidelines from the official
+website (select python of version 3): https://www.anaconda.com/download/
+
+Additional package required are: 
+- matplotlib
+- scipy
+- jupyter notebooks
+- pandas
+- seaborn
+- nltk
+- vaderSentiment
+- wordcloud
+- sklearn
+- pytorch
+
+To install them write the following command on Anaconda Prompt (anaconda3):
+```shell
+cd *THE_FOLDER_PATH_WHERE_YOU_DOWNLOADED_AND_EXTRACTED_THIS_REPOSITORY*
+```
+Then write for each of the mentioned packages:
+```shell
+conda install *PACKAGE_NAME*
+```
+Some packages might require more complex installation procedures (especially [pytorch](https://pytorch.org/)). If the above command doesn't work for a package, just google "How to install *PACKAGE_NAME* on *YOUR_MACHINE'S_OS*" and follow those guides.
+
+Finally, run the jupyter notebook **ADA_project.ipynb**. 
+
+## Files description
+
+- **[Datastory](https://dxts.github.io/ada-2021-project-datastory/)**: a website where we explain all the results we obtained as an easy-to-read article.
+
+- **ADA_project.ipynb**: main file, a jupyter notebook containing all the code to rerun all the experiments and analysis.
+
+-  **src/**: folder containing most of the code and helpers to run the analysis in *ADA_project.ipynb*. Used so that we did not overload the jupyter notebook with code, which would have make it unreadable.
+
+- **project_manifesto_experiments/**: folder containing code and experiments on an additional dataset ([Manifesto-Project dataset](https://manifestoproject.wzb.eu)). Since the results were not meaningful, it is not part of the data-story and for this reason it's on a separate folder.
+
+- **figures/**: folder containing the figures for the [datastory](https://dxts.github.io/ada-2021-project-datastory/).
+
+- **data/**: folder containing a part of the data that we carefully preprocessed and put into *.txt* files. Most of the data analysis initially started on the Quotebank dataset which is very large and could not be loaded in this repository. Visit Quotebank's website for info on how to access the whole dataset.
+
+## 🛠 Skills
+
+Matplotlib, Pandas, Pytorch, Nltk, Seaborn, Sklearn. Big dataset manipulation with Pandas, Word frequency analysis, transfer-learning, unsupervised clustering with Bertopic, preprocessing of the quotes,
+sentiment analysis with transformer models (BERT) and VADER-Sentiment, Textstat library for grammatical structure and complexity analysis, build a classifier using a CNN.
